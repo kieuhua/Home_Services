@@ -1,0 +1,17 @@
+<div class="container">
+   <h4>Item List</h4>
+   <div class="well">
+      <% current_order.order_items.each do |order_item| %> 
+         <div class="row">
+            <div class="col-xs-8">
+               <h6><%= order_item.service.service_name %></h6>
+            </div>
+            <div class="col-xs-4">        
+               <h6 class="text-right"> <span style="color: green"><%= number_to_currency order_item.total_price %></span></h6>       
+            </div>
+         </div>
+      <% end %>
+   </div>
+   <%= link_to '<button type="button">Place your order</button>'.html_safe, controller: 'cart', action: 'place_order' %> 
+</div>
+

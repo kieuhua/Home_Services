@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Subcategories</h1>
+<div role="tabpanel" class="tab-pane" id="services-comments">
+   <div class="container">   
+      <div class="row">
+      <% @subcategories.each do |sub| %>
+         <div class="subcategories-grid" data-columns>
+            <div class="subcategories-column">               
+               <span class="badge badge-warning badge-pill"><%= sub.subname %></span>           
+            </div>
+         </div>
+      <% end %>
+      </div>
+   </div>
+</div>
+
+
+<% if current_user.admin? %>
+   <%= render 'admin_index' %>
+<% end %>
+
+<%= link_to 'home', categories_path %>
+<br>
+<br>
+
+<!-- can't not new subcategory here, bc I don't have the category id here.
+I create new subcategory in category show
+-->
+<%#= link_to 'New Subcategory', new_category_subcategory_path(@category) %>

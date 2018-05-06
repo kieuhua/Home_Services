@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+   <% if current_user.admin %>
+      <p>I am admin </p>
+   <strong>id:</strong>
+    <%= @user.id %>
+    <br>
+    <% end %>
+    
+    <strong>email:</strong>
+   <%= @user.email %>
+   <br>
+   <strong>First name:</strong>
+   <%= @user.firstname %>
+   <br>
+   <strong>Last name:</strong>
+   <%= @user.lastname %>
+   <br>
+   
+   <% if current_user.admin %>
+   <strong>role:</strong>
+   <%= @user.role %>  
+   <br>
+   <strong>admin:</strong>
+   <%= @user.admin %>
+   <% end %>
+   <br>
+   <%= link_to 'Edit', edit_user_path(@user) %> 
+</p>
+
+<% if @user.profile %>
+   <%= link_to '<button type="button">Show Profile</button>'.html_safe, user_profile_path(@user, @user.profile) %>
+   <%#= link_to '<button type="button">Show Profile</button>'.html_safe, user_profile_path(@user) %>
+<% else %>
+   <%= link_to '<button type="button">Create Profile</button>'.html_safe, new_user_profile_path(@user.id) %>
+   <h6>You need to 'Create Profile' before you able to 'Create Client' or 'Create Vendor'</h6>
+<% end %>
+&nbsp;&nbsp 
+<% if @user.user? %>
+   <%= link_to '<button type="button">Create Client</button>'.html_safe, new_user_client_path(@user.id) %>
+   <span>&nbsp Or &nbsp </span>
+   <%= link_to '<button type="button">Create Vendor</button>'.html_safe, new_user_vendor_path(@user.id) %>
+<% end %>
+<% if @user.client? %>
+   <p>You are a client at Home Service</p>   
+   <%= link_to '<button type="button">Show Client</button>'.html_safe, client_path(@user.client) %>
+<% end %>
+<%if @user.vendor? %>
+   <p>You are a vendor  at Home Service</p>   
+   <%= link_to '<button type="button">Show Vendor</button>'.html_safe, vendor_path(@user.vendor) %>  
+<% end %>
+<br>
+<br>
+<%= link_to 'Back', users_path %> |
+<%= link_to 'Home', categories_path %> 

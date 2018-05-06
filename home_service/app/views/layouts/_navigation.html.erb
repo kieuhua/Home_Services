@@ -1,0 +1,64 @@
+<%# navigation styled for Bootstrap 4.0 %>
+<div class="container">
+<nav class="navbar navbar-inverse topnav bar-expand-md    bg-nav-homeservice     ">
+  <div class="container-fluid">
+    <div class="col-md-1 navbar-header bg-nav-homeservice">
+   
+      <a style="color:white" href="#">Home Services</a> 
+      <!-- <a class="homeservice-color-white" href="#">Home Services</a> -->
+    
+    </div>
+       <ul class="col-md-4 nav navbar-expand-md navbar-nav">
+         <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" dref="#">Repairs<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+               <li><a href="#electrical">Electrical</a></li>
+               <li><a href="#plumbing">Plumbing</a></li>
+               <li><a href="#carpentry">Carpentry</a></li>
+            </ul>
+         </li>
+         <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" dref="#">Cleaning<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+               <li><a href="#house">House</a></li>
+               <li><a href="#windows">Windows</a></li>
+               <li><a href="#carpet">Carpet</a></li>
+            </ul>
+         </li>
+         <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" dref="#">Yard<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+               <li><a href="#lawn">Lawn</a></li>
+               <li><a href="#garden">Garden</a></li>
+               <li><a href="#pool">Pool</a></li>
+            </ul>
+         </li>
+         <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" dref="#">Helpers<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+               <li><a href="#nanny">Nanny</a></li>
+               <li><a href="#catering">Catering</a></li>
+               <li><a href="#personal">Personal</a></li>
+            </ul>
+         </li>        
+       </ul>
+       <ul class="col-md-4 nav navbar-expand-xs rightnav navbar-right" >
+      <% if user_signed_in? %>
+         <!-- need to use try, so it return nil instead of raise error -->
+         <% if current_user.try(:client) %>      
+            <li><a href="/cart/your_cart">your cart</li>
+            <li><a href="/cart/checkout">Check out</li>
+         <% end %>
+         <li data-toggle="tooltip" title="Click to change password"><%= link_to current_user.email, edit_user_registration_path %></li>
+         <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+       <li class="rightnav"><%= link_to "Sign Up", new_user_registration_path %></li>
+       <li><%= link_to "Login", new_user_session_path %></li>
+      <% end %>
+    </ul>
+    <%= form_tag(services_path, class: "form-inline my-2 my-lg-0", :method => "get") do %>
+    		<%= text_field_tag :search, params[:search], placeholder: "Search Services" %>
+    		<%= submit_tag "Search", :name => nil, class: "btn btn-outline-success my-2 my-sm-0"  %>
+    <% end %>    
+</nav> 
+</div>

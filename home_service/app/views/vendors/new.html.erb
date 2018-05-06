@@ -1,0 +1,13 @@
+<h1>New Vendor</h1>
+
+<% if current_user.profile.nil? %>
+   <h5>You need to create Profile, before become a vendor</h5>
+   <%= link_to '<button type="button">New Profile</button>'.html_safe, new_user_profile_path(current_user.id) %>
+<% else %>
+   <%= render 'form', vendor: @vendor %>
+<% end %>
+
+<%= link_to 'Home', users_path %>
+
+
+

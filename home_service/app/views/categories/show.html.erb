@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+  <p class="homeservice-cursive-font-140"><%= @category.name %></p>
+
+<!-- I will not have link_to, I just list all subcategories belongs to that category with each -->
+<% if !@category.subcategories.empty? %>
+   <h5>These are subcategories</h5>
+   <%= render 'categories/shared/list_subs', id: @category.id %>
+<% else %>
+   <h5>There is no subcategory</h5>
+<% end %>
+<br>
+<% if current_user.admin? %>
+   <%= link_to 'Edit', edit_category_path(@category) %> |
+   <%= link_to 'Back', categories_path %>
+   <br><br>
+   <%= link_to '<button type="button">New Subcategory</button>'.html_safe, new_category_subcategory_path(@category) %>
+<% else %>
+   <%= link_to 'Back', categories_path %>
+<% end %>
+<br>
+<br>
+
+

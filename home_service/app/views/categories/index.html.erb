@@ -1,0 +1,50 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<%#= button_to 'Services', services_path %>
+<%#= button_to 'Services/kieu', controller: services, action: 'kieu'%>
+
+  <% if current_user.admin? %>
+     <p>I am admin</p>
+   <% else %>          
+      <%# if current_user.role.nil? || current_user.role.eql?(0) %>
+      <% if current_user.user? %>
+         <h5>Would you like to become a client or a vendor at Home Service?</h5>
+         <%= link_to '<button type="button">New Client</button>'.html_safe, new_user_client_path(current_user.id) %>
+         &nbsp &nbsp 
+         <%= link_to '<button type="button">New Vendor</button>'.html_safe, new_user_vendor_path(current_user.id) %>         
+         <h6>$100 bonus for becoming a client or a vendor at Home Service.<h6>
+         <br>        
+      <% end %>    
+      <% if current_user.client? %>          
+         <h6><%= current_user.fullname %> is a client at Home Service</h6>
+      <% end %>
+      <% if current_user.vendor? %>             
+         <h6><%= current_user.fullname %> is a Vendor at Home Service</h6>           
+      <% end %> 
+        
+      <%= link_to '<button type="button">Show User</button>'.html_safe, user_path(current_user) %>             
+  <% end %>
+  
+  <h3>Categories</h3>  
+  <% @categories.each do |category| %>   
+    <table>
+      <tbody>
+         <tr>
+            <td><li class="homeservice-cursive-font-140" ><%= category.name %></td>           
+            <td><%= link_to 'Subcategories', category %></td>  
+            <% if current_user.admin? %>                                
+               <td><%= link_to 'Edit', edit_category_path(category) %></td>
+               <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+            <% end %>             
+         </tr>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% if current_user.admin? %>
+     <%= link_to 'New Category', new_category_path %>
+  <% end %>
+  <br><br>
+  
+ 
+  

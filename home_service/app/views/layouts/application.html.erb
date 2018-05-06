@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Service</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+     <title><%= content_for?(:title) ? yield(:title) : "Rails Bootstrap" %></title>
+     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Bootstrap" %>">
+     
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+     
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
+     
+    <%= csrf_meta_tags %>
+   
+  </head>
+   
+  <body>
+   <header>
+     <%= render 'layouts/navigation' %>
+     <%= render 'layouts/sidebar' %>
+   </header>
+   <main role="main">
+      <%= render 'layouts/messages' %>
+      <div id="main-container" class="container">            
+         <div class="row"> 
+           <div class="col-xs-6">
+             <!-- <h4><%= link_to "Home Service", root_path %></h4> -->
+           </div>
+           <div class="col-xs-6 text-right">
+             <h6 class="cart-text"><%= render 'layouts/cart_text' %></h6>
+           </div>
+           <div>         
+               <%= yield %>
+            </div>
+         </div>       
+      </div>
+   </main>
+   <%= render 'layouts/sections' %>
+   <%= render 'layouts/about' %>
+   <%= render 'layouts/contact' %>
+   <%= render 'layouts/footer'  %>
+  </body>
+</html>

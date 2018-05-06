@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
+
+/* Add a black background color to the top navigation */
+.topnav 
+   background-color: #008000			
+   overflow: hidden
+
+/* Style the links inside the navigation bar */
+.navbar-brand-homeservice
+   color: white
+
+.topnav a 
+   float: left
+   display: block
+   //color:  #f2f2f2
+   color: #818181
+   text-align: center
+   padding: 14px 16px
+   text-decoration: none
+   font-size: 17px
+   border-bottom: 3px solid transparent
+
+.topnav a:hover 
+   border-bottom: 3px solid red
+   background-color: #f2f2f2
+
+.topnav a.active 
+   border-bottom: 3px solid red
+
+.rightnav a
+   //background-color: #4CAF50 /* Green */
+   border: none
+   color: white
+   //color: #818181
+   padding: 5px 5px
+   text-align: center
+   text-decoration: none
+   display: inline-block
+   font-size: 14px
+
+.bg-nav-homeservice 
+   background-image: url('skyline.png')
+   background-size: cover
+   color: #504747
+

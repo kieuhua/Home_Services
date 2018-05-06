@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @comment.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @comment.description %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<% if current_user.client? %>
+   <%= link_to 'Back', client_path(current_user.client) %>
+<% end %>
+<% if current_user.vendor? %>
+   <%= link_to 'Back', vendor_path(current_user.vendor) %>
+<% end %>

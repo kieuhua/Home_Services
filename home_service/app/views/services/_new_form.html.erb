@@ -1,0 +1,56 @@
+<%= form_with(model: service, local: true) do |form| %>
+   
+<!-- finally, I can use current_user.vendor.id to get the vendor id,
+   so, now I can use model instead of url. Wow! what a trip, finally I nailed.
+-->
+<!-- I need to use url, because model, I can't get vendor id 
+   however, with url, then I can't user require(:service) in the controller.
+   let try once more thing, asign @vendor_id in new
+-->
+<%#= form_with(url: vendor_services_path) do |form| %>
+  <% if service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+      <% service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+      <%= form.label :subcategories %>
+      <%= select("service", :subcategory_id, Subcategory.all.collect { |sc| [sc.subname, sc.id] }) %>    
+   </div>
+    
+
+  <div class="field">
+    <%= form.label :service_name %>
+    <%= form.text_field :service_name, id: :service_service_name %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :service_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rate %>
+    <%= form.text_field :rate, id: :service_rate %>
+  </div>
+
+  <div class="field">
+      <%#= form.hidden_field :subcategory_id, :value => service[:subcatory_id] %>
+    </div>
+
+    <div class="field">
+        <%= form.hidden_field :vendor_id, :value => params[:vendor_id] %>
+      </div>
+
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

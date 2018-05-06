@@ -1,0 +1,126 @@
+models_list.txt
+
+						Model lists
+
+4.1.2.3 :counter_cache
+#kieu I can use :counter_cache in service
+The :counter_cache option can be used to make finding the number of belonging objects more efficient. Consider these models:
+
+An client is a user, a person can only orders order_services.
+An vendor is a user, a person can only create services.
+
+Admin:	can edit user info - password, firstname, lastname
+	admin can delete a cient and a vendor 
+	
+————-
+User
+email			:email		
+password	:password
+string			:firstname
+string			:lastname
+string			:admin
+
+has_one 	:person
+—————
+
+Category			# adamin can create category
+string		:name	, 	presence: :true
+	
+has_many 	:subcategories
+———
+
+SubCategory		# adamin can create category
+string		:name	
+	
+has_may 	:services
+————
+
+Service							# create by vendor
+string 		:name	,				presence: 	true
+string 		:description,			presence:	true
+float		:rate( per hour),		presence:  	true
+integer	:rating(5 stars)		# generate from ratings records, default “no rated”
+
+belongs_to 	:subcategory		# has subcategory_id column
+belongs_to 	:vendor				# has vendor_id column
+
+# mean many order_services point to the same service
+has_many 	:order_services,  	dependent:	:destroy
+
+has_many :pictures,		as: :imageable
+
+# When client click a ‘done’ on service => show ratings and comments to be filled
+has_many 	:ratings, 			dependent:	:destroy
+has_many 	:comments,		dependent: 	:destroy
+————-
+
+Rating		# create by client, afeter change the order_status to ‘done’
+integer	:stars
+
+belongs_to	:services		# has :service_id column
+—————
+
+Comment		# create by client, after change the order_status to ‘done’
+string		:description
+
+belongs_to 	:client		# has :client_id column
+————
+
+Person			# create after successful signed up
+string			:phone,		presence: true
+string			:street,		presence: true
+string			:city,			presence: true
+string			:state,			presence: true
+string			:zipcode,		presence: true
+
+boolean		:client
+boolean		:vendor
+
+has_one	 :picture,		as:  :imageable
+
+has_one 	:client,		dependent: :destroy
+has_one 	:vendor,		dependent: :destroy
+————
+
+vendor		# a person can create a vendor, click on “vendor” button after sign-in
+string		:company_name	
+
+belongs_to 	:person		# has :person_id column
+
+has_many 	:services, 		dependent: :destroy
+
+has_many   	:order_services, 	through: :services	
+has_many   	:comments,			through: :services
+has_many 	:ratings,				thouugh:	services		
+———-
+
+client			# a person can create a client
+integer		:credit_cards			# to be filled before place the order
+
+belongs_to 	:person		# has :person_id foreign key
+has_many 	:orders,			dependent: :destroy
+———
+
+Order			# create a client
+integer	id = order_number	=> unique
+
+has_many :order_services,	dependent: :destroy	
+———
+
+Order_service			# create by client click on service, fill in quantiy, then click order
+integer	:status 		# select [1=‘done’, 2=‘open’, 3=‘cancel’]
+integer	:quantity		# number of hours of service
+
+belongs_to 	:order		# has order_id column
+belongs_to 	:service	# has service_id column, you can get all info from that service
+—————
+
+Picture
+string 			:name
+attachment	:picture		# ??
+
+belongs_to :imageable, 	polymorphic: true
+=> CreatePictures
+integer	:imageable_id			# foreign key
+string		:imageable_type		# type of column in the model
+add_index :pictures, [:imageable_type, :imageable_id]

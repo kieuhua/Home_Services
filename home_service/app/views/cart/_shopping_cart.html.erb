@@ -1,0 +1,27 @@
+
+<% if !@order_item.nil? && @order_item.errors.any? %>
+	<div class="alert alert-danger">
+		<ul>
+			<% @order_item.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%# if @order_items.size == 0 %>
+<div>
+<% if current_order.order_items.size == 0 %>
+   <p class="text-center">
+      There are no items in your shopping cart. Please <%= link_to "go back", root_path %> add some items to yur cart.
+   </p>
+<% else %>
+   <%# @order_items.each do |order_item| %>
+   <% current_order.order_items.each do |order_item| %> 
+      <!-- I don't think :show_total is used in _cart_row.html.erb -->
+      <%= render 'cart/cart_row', service: order_item.service, order_item: order_item, show_total: true %>
+   <% end %>
+<% end %>
+</div>
+
+<%= link_to 'All Services', services_path %>

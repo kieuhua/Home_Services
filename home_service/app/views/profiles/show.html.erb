@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+   <strong>Phone:</strong>
+   <%= @profile.phone %>
+</p>
+<p>
+   <strong>Street:</strong>
+   <%= @profile.street %>
+</p>
+<p>
+   <strong>State:</strong>
+   <%= @profile.state %>
+</p>
+
+<p>
+   <strong>Zipcode:</strong>
+   <%= @profile.zipcode %>
+</p>
+<p>
+   <strong>Avatar:</strong>
+</p>
+<% if @profile.avatar.url(:thumb) %>
+   <% @image_src = @profile.avatar.url(:thumb).sub(/\/app\/assets\/images\//, "")  %>
+   <%= image_tag @image_src %>
+<% end %>
+
+<%#= image_tag @profile.avatar.url(:thumb) %>
+
+<%= link_to 'Edit', edit_profile_path %> |
+<%= link_to 'back', users_path %> |
+<%= link_to 'Home', categories_path %>

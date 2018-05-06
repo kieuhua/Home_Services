@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_name: MyString
+  description: MyText
+  rate: 1.5
+  rating: 1.5
+  vendor: one
+
+two:
+  service_name: MyString
+  description: MyText
+  rate: 1.5
+  rating: 1.5
+  vendor: two

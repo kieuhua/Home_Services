@@ -1,0 +1,31 @@
+<% if current_user && current_user.client? %>
+   <!-- need to check for no order_items object with try to return nil -->
+   <% if current_order.try(:order_items) || current_order.order_items.empty? %>  
+      <p>Your cart is empty.</p>
+   <% else %>
+   <div role="tabpannel" class="tab-pane" id="cart">
+      <div class="text-center">
+         <h5 class="bg-primary">Your Cart</h5>
+      </div>
+      <div class="container">
+         <table id="cart-table" class="table table-striped">
+            <thead>
+               <tr>
+                  <th>Number items</th>
+                  <th>Your cart total</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><%= current_order.order_items.size %></td>
+                  <td><%= number_to_currency current_order.total %></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>     
+   </div> 
+   <% end %>
+   
+   <%= link_to 'Show Cart', cart_path(current_order), class: "btn btn-link" %>   
+   
+<% end %>

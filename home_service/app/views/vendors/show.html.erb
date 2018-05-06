@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<% if @vendor.nil? %>
+   <h4>You need to create client</h4>
+   <%= link_to '<button type="button">Create Client</button>'.html_safe, new_user_client_path(current_user.id) %>
+<% else %>
+   <p>
+  <strong>Company name:</strong>
+  <%= @vendor.company_name %>
+  </p>
+  <p>
+  <strong>Description:</strong>
+  <%= @vendor.description %>
+  </p>
+
+  <%= link_to 'Edit', edit_vendor_path(@vendor) %> 
+  <br><br>
+    
+    <!-- this is selection category and subcategory section -->
+    
+    
+    <!-- link to create a new service, servce is sigular here -->
+    
+    <!-- it should not go directly to controller, it should generate the new.html.erb -->
+    
+    <!-- same result above link_to '<button .., no form, directly to controller -->
+    <%= link_to '<button type="button">New Service</button>'.html_safe, new_vendor_service_path(@vendor) %>
+     
+     <%= link_to '<button type="button">All Services</button>'.html_safe, services_path %>
+     
+     <%#= link_to 'New Service', new_vendor_service_path(@vendor) %>
+     <%#= button_to 'New Service', vendor_services_path(@vendor), :method => :post %>
+    
+    <!-- the button_to give me no route -->
+    <%#= button_to 'New Service', new_vendor_service_path(@vendor), :method => :get %>
+    
+     <%#= button_to 'New Service', new_service_path %>
+     <%#= button_to 'Servies', services_path %>
+  
+  <!-- I want this path -->
+    <!-- new_vendor_service_path	GET	/vendors/:vendor_id/services/new(.:format)	services#new  -->
+    
+    <br><br>
+     <%= link_to '<button type="button">All Comments</button>'.html_safe, comments_path %>
+     <br>
+     <%= link_to '<button type="button">New Comment</button>'.html_safe, new_comment_path %>
+    
+<% end %>
+<br>
+<br>
+
+<%= link_to 'back', user_path(current_user.id) %> |
+<%= link_to 'Home', categories_path %>

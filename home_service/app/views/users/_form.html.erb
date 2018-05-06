@@ -1,0 +1,33 @@
+<%= form_with model: @user do |form| %>
+   <% if @user.admin? %>
+   <div class="field">
+      <%= form.label :id %>
+      <%= form.text_field :id, id: :id %>
+   </div>
+   <% end %>
+   <div class="field">
+      <%= form.label :email %>
+      <%#= form.email_field :email, id: :email %>
+      <span><%= @user.email %></span>
+   </div>  
+  <div class="field">
+     <%= form.label :firstname %>
+     <%= form.text_field :firstname, id: :user_firstname %>
+   </div>
+   <div class="field">
+        <%= form.label :lastname %>
+        <%= form.text_field :lastname, id: :user_lastname %>
+      </div>
+   
+   <% if current_user.admin %>
+   <div class="field">
+      <%= form.label :admin %>
+      <%= form.check_box :admin, id: :user_admin %>
+   </div>
+   
+   <% end %>
+   
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
